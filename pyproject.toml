@@ -1,0 +1,36 @@
+[tool.pylint.MESSAGE_CONTROL]
+disable="""
+    bad-continuation,
+    no-else-return,
+    too-few-public-methods,
+    line-too-long,
+    duplicate-code,
+    import-error,
+    unused-argument,
+    no-self-use,
+    import-outside-toplevel,
+    fixme,
+    missing-module-docstring,
+    missing-class-docstring,
+    too-many-ancestors,
+    unused-variable,
+    no-member,
+    broad-except,
+    invalid-sequence-index,
+    too-many-instance-attributes,
+    too-many-arguments
+"""
+
+
+[tool.pylint.REPORTS]
+reports="no"
+
+[tool.pylint.FORMAT]
+max-line-length="88"
+
+[tool.pylint.BASIC]
+good-names="_,i,j,k,e,qs,pk,setUp,tearDown,maxDiff,default_app_config"
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
