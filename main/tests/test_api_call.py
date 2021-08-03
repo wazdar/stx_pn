@@ -18,3 +18,16 @@ class TestApiCalls(TestSetUp):
         api_data = ApiRequest("war").get_data()
 
         self.assertEqual(len(api_data), len(google_call["items"]))
+
+    @responses.activate
+    def test_grab_data_from_google_empty_respones(self):
+        responses.add(
+            responses.GET,
+            "https://www.googleapis.com/books/v1/volumes?q=war&startIndex=0&maxResults=40",
+            json={},
+            status=200,
+        )
+
+        api_data = ApiRequest("war").get_data()
+
+        self.assertEqual(len(api_data), 0)

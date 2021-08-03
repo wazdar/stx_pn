@@ -94,7 +94,7 @@ class ApiRequest:
         """
         data = []
         raw_data = self.__make_request()
-        total_items = raw_data["totalItems"]
+        total_items = raw_data.get("totalItems", None)
 
         self.__get_necessary_data(raw_data=raw_data["items"], data_set=data)
 
