@@ -96,21 +96,22 @@ class ApiRequest:
         raw_data = self.__make_request()
         total_items = raw_data.get("totalItems", None)
 
-        self.__get_necessary_data(raw_data=raw_data["items"], data_set=data)
+        if "items" in raw_data:
+            self.__get_necessary_data(raw_data=raw_data["items"], data_set=data)
 
-        if 0 < total_items > 40:
-            current_index = 40
+            if 0 < total_items > 40:
+                current_index = 40
 
-            while current_index < total_items:
-                try:
-                    raw_data = self.__make_request(start_index=current_index)
-                    if "items" in raw_data:
-                        self.__get_necessary_data(
-                            raw_data=raw_data["items"], data_set=data
-                        )
-                except Exception as e:
-                    print(f"Error - {e}")
+                while current_index < total_items:
+                    try:
+                        raw_data = self.__make_request(start_index=current_index)
+                        if "items" in raw_data:
+                            self.__get_necessary_data(
+                                raw_data=raw_data["items"], data_set=data
+                            )
+                    except Exception as e:
+                        print(f"Error - {e}")
 
-                current_index += 40
+                    current_index += 40
 
         return data
