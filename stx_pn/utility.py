@@ -34,7 +34,7 @@ class ApiRequest:
     def __init_query(self, query: str):
         return self.__API_URL + query
 
-    def __make_request(self, max_results: int = 40, start_index: int = 0) -> list:
+    def __make_request(self, max_results: int = 40, start_index: int = 0) -> dict:
         """
         Do request and return JSON.
         :param max_results:
@@ -45,10 +45,11 @@ class ApiRequest:
             request = requests.get(
                 f"{self.query_url}&startIndex={start_index}&maxResults={max_results}"
             )
+            return request.json()
         except requests.exceptions.RequestException as e:
             print(e)
 
-        return request.json()
+        return {}
 
     def __get_necessary_data(self, raw_data: list, data_set: list) -> None:
         """
